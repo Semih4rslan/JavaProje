@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 		paddle2.draw(g);
 		ball.draw(g);
 		score.draw(g);
-Toolkit.getDefaultToolkit().sync(); // I forgot to add this line of code in the video, it helps with the animation
+Toolkit.getDefaultToolkit().sync(); 
 
 	}
 	public void move() {
@@ -61,7 +61,8 @@ Toolkit.getDefaultToolkit().sync(); // I forgot to add this line of code in the 
 	}
 	public void checkCollision() {
 		
-		//bounce ball off top & bottom window edges
+		//topu pencerenin üst ve alt kenarlarından sektirmek için
+		
 		if(ball.y <=0) {
 			ball.setYDirection(-ball.yVelocity);
 		}
@@ -71,9 +72,9 @@ Toolkit.getDefaultToolkit().sync(); // I forgot to add this line of code in the 
 		//bounce ball off paddles
 		if(ball.intersects(paddle1)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
-			ball.xVelocity++; //optional for more difficulty
+			ball.xVelocity++; //daha fazla zorluk için 
 			if(ball.yVelocity>0)
-				ball.yVelocity++; //optional for more difficulty
+				ball.yVelocity++; 
 			else
 				ball.yVelocity--;
 			ball.setXDirection(ball.xVelocity);
@@ -81,15 +82,17 @@ Toolkit.getDefaultToolkit().sync(); // I forgot to add this line of code in the 
 		}
 		if(ball.intersects(paddle2)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
-			ball.xVelocity++; //optional for more difficulty
+			ball.xVelocity++; 
 			if(ball.yVelocity>0)
-				ball.yVelocity++; //optional for more difficulty
+				ball.yVelocity++; 
 			else
 				ball.yVelocity--;
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
-		//stops paddles at window edges
+		
+		//pencere kenarlarındaki raketleri durdurmak için
+		
 		if(paddle1.y<=0)
 			paddle1.y=0;
 		if(paddle1.y >= (GAME_HEIGHT-PADDLE_HEIGHT))
@@ -98,7 +101,9 @@ Toolkit.getDefaultToolkit().sync(); // I forgot to add this line of code in the 
 			paddle2.y=0;
 		if(paddle2.y >= (GAME_HEIGHT-PADDLE_HEIGHT))
 			paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
-		//give a player 1 point and creates new paddles & ball
+		
+		//birinci oyuncuya 1 puan verir ve yeni raketler ve top yaratır
+		
 		if(ball.x <=0) {
 			score.player2++;
 			newPaddles();
